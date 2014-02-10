@@ -1,3 +1,3 @@
-# Ghost
+## ghost
 
-** TODO: Add description **
+Yet another Gist utility.
