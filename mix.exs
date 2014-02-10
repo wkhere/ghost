@@ -7,7 +7,8 @@ defmodule Ghost.Mixfile do
       elixir: "~> 0.12.3",
       deps: deps,
       escript_main_module: Ghost.Server,
-      escript_name: :ghostd
+      escript_name: :ghostd,
+      escript_emu_args: "%%! -sname ghostd -detached\n"
     ]
   end
 
