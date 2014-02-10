@@ -8,9 +8,9 @@ defmodule Ghost do
     body |> to_string |> :jsx.decode
   end
 
-  def get(url) do
-    get(url, [], [ibrowse: [{:basic_auth, 
-      {config["tok"] |> String.to_char_list!, 'x-oauth-basic'}}]])
+  def opts() do
+    [ibrowse: [{:basic_auth, 
+        {config["tok"] |> String.to_char_list!, 'x-oauth-basic'}}]]
   end
 
   def config() do
@@ -23,6 +23,8 @@ defmodule Ghost do
     [k,v] = line |> String.rstrip |> String.split("=")
     {String.strip(k), String.strip(v)}
   end
+
+  def get(url), do: get(url, [], opts)
 
   def gists() do
     get("/users/#{config["me"]}/gists").body
