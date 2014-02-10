@@ -6,7 +6,8 @@ defmodule Ghost.Mixfile do
       version: "0.0.1",
       elixir: "~> 0.12.3",
       deps: deps,
-      escript_main_module: Ghost,
+      escript_main_module: Ghost.Server,
+      escript_name: :ghostd
     ]
   end
 
