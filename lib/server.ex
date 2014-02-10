@@ -26,11 +26,21 @@ end
 defmodule Ghost.Server do
   @port 64738
 
-  def listen(port \\ @port) do
+  def main([]), do: main([@port])
+  def main([port]) when is_binary(port) do
+    {port, ""} = Integer.parse(port)
+    main([port])
+  end
+  def main([port]) when is_integer(port) do
     Ghost.Config.register
+    listen(port)
+  end
 
-    {:ok, master} = :gen_tcp.listen(port, [:binary, packet: :line, active: false])
-    accept_loop(master)
+  def listen(port \\ @port) do
+    case :gen_tcp.listen(port, [:binary, packet: :line, active: false]) do
+      {:ok, master} -> accept_loop(master)
+      _ -> System.halt(2)
+    end
   end
 
   def accept_loop(socket) do
