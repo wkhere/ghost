@@ -40,4 +40,9 @@ defmodule Ghost do
       Set.member?(fields, k)
     end)
   end
+
+  def main(args) do
+    IO.inspect gists
+    # todo: dense print, 1 row per gist
+  end
 end

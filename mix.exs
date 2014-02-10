@@ -5,7 +5,9 @@ defmodule Ghost.Mixfile do
     [ app: :ghost,
       version: "0.0.1",
       elixir: "~> 0.12.3",
-      deps: deps ]
+      deps: deps,
+      escript_main_module: Ghost,
+    ]
   end
 
   # Configuration for the OTP application
