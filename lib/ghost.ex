@@ -26,7 +26,18 @@ defmodule Ghost do
 
   def get(url), do: get(url, [], opts)
 
-  def gists() do
+  def gists(filter_row \\ &id/1, filter_col \\ &sel/1) do
     get("/users/#{config["me"]}/gists").body
+    |> Enum.filter(filter_row)
+    |> Enum.map(filter_col)
+  end
+
+  defp id(x), do: x
+
+  def sel(gist, fields \\ ["id", "files", "public"]) do
+    fields = HashSet.new fields
+    gist |> Dict.to_list |> Enum.filter(fn {k, _v} ->
+      Set.member?(fields, k)
+    end)
   end
 end
