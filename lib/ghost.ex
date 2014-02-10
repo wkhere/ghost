@@ -7,4 +7,19 @@ defmodule Ghost do
   def process_response_body(body) do
     body |> to_string |> :jsx.decode
   end
+
+  def get(url) do
+    get(url, [], [ibrowse: [{:basic_auth, {config["tok"], 'x-oauth-basic'}}]])
+  end
+
+  def config() do
+    File.stream!(Elixir.System.user_home<>"/.ghostrc")
+      |> Enum.reduce [], fn(l,acc)->
+        [ process_line(l) | acc ]
+      end
+  end
+  defp process_line(line) do
+    [k,v] = line |> String.rstrip |> String.split("=")
+    {String.strip(k), String.strip(v) |> String.to_char_list!}
+  end
 end
