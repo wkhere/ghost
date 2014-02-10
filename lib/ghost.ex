@@ -23,4 +23,8 @@ defmodule Ghost do
     [k,v] = line |> String.rstrip |> String.split("=")
     {String.strip(k), String.strip(v)}
   end
+
+  def gists() do
+    get("/users/#{config["me"]}/gists").body
+  end
 end
