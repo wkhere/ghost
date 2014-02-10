@@ -42,13 +42,12 @@ defmodule Ghost.Server do
   def conn_loop(socket) do
     case :gen_tcp.recv(socket, 0) do
       {:ok, data} ->
-        res = case data |> parse do
+        resp = case data |> parse do
           []  -> "gimme sth"
-          cmd -> :error_logger.info_msg "* got:" <> inspect(cmd) 
-            cmd |> invoke
+          cmd -> cmd |> invoke |> encode
         end
         # todo: above in monadic style
-        :gen_tcp.send(socket, res |> encode)
+        :gen_tcp.send(socket, resp<>"\n")
         conn_loop(socket)
       {:error, :closed} -> :ok
     end
@@ -64,6 +63,6 @@ defmodule Ghost.Server do
   end
 
   def encode(result) do
-    inspect(result) <> "\n"
+    inspect(result, pretty: true)
   end
 end
