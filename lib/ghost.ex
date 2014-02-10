@@ -1,0 +1,2 @@
+defmodule Ghost do
+end
