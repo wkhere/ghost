@@ -8,7 +8,7 @@ defmodule Ghost.Mixfile do
       deps: deps,
       escript_main_module: Ghost.Server,
       escript_name: :ghostd,
-      escript_emu_args: "%%! -sname ghostd -detached\n"
+      escript_emu_args: "%%! -sname ghostd -noinput\n"
     ]
   end
 
