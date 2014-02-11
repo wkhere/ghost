@@ -1,0 +1,14 @@
+#!/bin/sh
+
+port=64738
+
+run() {
+    echo $@ | nc 127.0.0.1 $port
+}
+
+run >/dev/null
+if [ $? -ne 0 ]; then
+    ./ghostd
+    sleep 1 
+fi
+run $@
