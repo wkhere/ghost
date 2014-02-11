@@ -1,6 +1,6 @@
 defmodule Ghost.Config do
   def from_file() do
-    File.stream!(Elixir.System.user_home<>"/.ghostrc")
+    File.stream!(System.user_home<>"/.ghostrc")
       |> Enum.reduce [], fn(l,acc)->
         [ process_line(l) | acc ]
       end
