@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 port=64738
 
@@ -7,8 +7,10 @@ run() {
 }
 
 run >/dev/null
-if [ $? -ne 0 ]; then
+if [ $? -ne 0 ]; then 
     ./ghostd
-    sleep 1 
+    until run >/dev/null; do
+        sleep 0.1
+    done
 fi
 run $@
