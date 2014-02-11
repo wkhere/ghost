@@ -1,0 +1,1 @@
+exec ruby -Ilib -rserver -e 'Ghost::Server.listen'

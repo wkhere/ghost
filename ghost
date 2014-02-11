@@ -9,6 +9,5 @@ run() {
 run >/dev/null
 if [ $? -ne 0 ]; then
     ./ghostd
-    sleep 1 
 fi
 run $@
