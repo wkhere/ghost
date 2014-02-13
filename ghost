@@ -11,9 +11,10 @@ run() {
 
 run >/dev/null
 if [ $? -ne 0 ]; then 
-    ./ghostd
+    ./ghostd &
     until run >/dev/null; do
         sleep 0.1
     done
+    disown
 fi
 run $@
