@@ -3,8 +3,8 @@ defmodule Ghost.Mixfile do
 
   def project do
     [ app: :ghost,
-      version: "0.0.1",
-      elixir: "~> 0.12.3",
+      version: "0.0.2",
+      elixir: "~> 0.13.2",
       deps: deps,
       escript_main_module: Ghost.Server,
       escript_name: :ghostd,
@@ -23,7 +23,7 @@ defmodule Ghost.Mixfile do
   # To specify particular versions, regardless of the tag, do:
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
-    [ { :httpotion, github: "myfreeweb/httpotion" },
+    [ { :httpotion, "~> 0.2.3", github: "myfreeweb/httpotion" },
       { :jsx,       github: "talentdeficit/jsx" },
     ]
   end

@@ -7,7 +7,7 @@ defmodule Ghost.Config do
   end
   defp process_line(line) do
     [k,v] = line |> String.rstrip |> String.split("=")
-    {String.strip(k), String.strip(v)}
+    {String.strip(k) |> binary_to_atom, String.strip(v)}
   end
 
   def register() do
