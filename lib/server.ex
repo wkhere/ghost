@@ -7,7 +7,7 @@ defmodule Ghost.Config do
   end
   defp process_line(line) do
     [k,v] = line |> String.rstrip |> String.split("=")
-    {String.strip(k) |> binary_to_atom, String.strip(v)}
+    {String.strip(k) |> String.to_atom, String.strip(v)}
   end
 
   def register() do
@@ -69,7 +69,7 @@ defmodule Ghost.Server do
 
   def invoke(cmd) do
     [ fun | args ] = cmd
-    apply(Ghost, binary_to_atom(fun), args)
+    apply(Ghost, String.to_atom(fun), args)
   end
 
   def encode(result) do

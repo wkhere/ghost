@@ -1,5 +1,5 @@
 defmodule Ghost do
-  use HTTPotion.Base
+  use HTTPoison.Base
   alias Ghost.Config
 
   def process_url(url), do: "https://api.github.com" <> url
@@ -11,7 +11,7 @@ defmodule Ghost do
 
   def opts() do
     [ibrowse: [{:basic_auth, 
-        {Config.get[:tok] |> List.from_char_data!, 'x-oauth-basic'}}]]
+        {Config.get[:tok] |> String.to_char_list, 'x-oauth-basic'}}]]
   end
 
   def get(url), do: get(url, [], opts)

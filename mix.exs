@@ -3,18 +3,21 @@ defmodule Ghost.Mixfile do
 
   def project do
     [ app: :ghost,
-      version: "0.0.2",
-      elixir: "~> 0.13.2",
+      version: "0.0.3",
+      elixir: "~> 1.0.2",
       deps: deps,
-      escript_main_module: Ghost.Server,
-      escript_name: :ghostd,
-      escript_emu_args: "%%! -noinput\n"
+      escript:
+        [main_module: Ghost.Server,
+         name: :ghostd,
+         #embed_elixir: true,
+         escript_emu_args: "%%! -noinput\n"
+        ]
     ]
   end
 
   # Configuration for the OTP application
   def application do
-    [ applications: [:httpotion, :jsx] ]
+    [ applications: [:httpoison, :jsx] ]
   end
 
   # Returns the list of dependencies in the format:
@@ -23,8 +26,8 @@ defmodule Ghost.Mixfile do
   # To specify particular versions, regardless of the tag, do:
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
-    [ { :httpotion, "~> 0.2.3", github: "myfreeweb/httpotion" },
-      { :jsx,       github: "talentdeficit/jsx" },
+    [ { :httpoison, "~> 0.5.0" },
+      { :jsx, "~> 2.0.0" },
     ]
   end
 end
